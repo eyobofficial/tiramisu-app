@@ -89,3 +89,21 @@ class Product(models.Model):
         return self.title
 
 
+class Inventory(models.Model):
+    """
+    Abstracts Product Inventory
+    """
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    stock = models.IntegerField(blank=True, null=True, default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['product', ]
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse('supermarket:Inventory-detail', args=[str(self.pk)])
+
+    def __str__(self):
+        return self.product
+
+

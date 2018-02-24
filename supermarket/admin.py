@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Import Models
-from .models import Catagory, Brand, Tag, Product
+from .models import Catagory, Brand, Tag, Product, Inventory
 
 
 # Register Catagory, Brand & Tag Models
@@ -17,7 +17,22 @@ class ProductAdmin(admin.ModelAdmin):
         'title',
         'catagory',
         'brand',
+        'price',
         'on_sale',
         'created_at',
         'updated_at'
+    )
+    list_filter = (
+        'brand',
+        'catagory',
+        'on_sale',
+    )
+
+
+# Register Inventory Model
+@admin.register(Inventory)
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'product',
+        'stock',
     )
