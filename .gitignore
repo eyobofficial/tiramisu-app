@@ -8,3 +8,6 @@ myvenv
 # Cache Files
 __pycache__
 *.pyc
+
+# Media Assets
+media/*

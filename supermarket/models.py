@@ -66,7 +66,10 @@ class Product(models.Model):
         blank=True
     )
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    thumbnail = models.ImageField(upload_to='thumbnails/')
+    thumbnail = models.ImageField(
+        upload_to='thumbnails/',
+        null=True, blank=True
+    )
     expiration_date = models.DateField(
         'Product Expiration Date',
         null=True,

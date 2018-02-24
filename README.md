@@ -1,2 +1,2 @@
 # TIRAMISU APP
-## Cataloge Solution for Your Supermarkets
+## Catalog Solution for Your Supermarkets
