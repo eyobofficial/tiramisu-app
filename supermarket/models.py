@@ -129,5 +129,4 @@ class Inventory(models.Model):
         return reverse('supermarket:Inventory-detail', args=[str(self.pk)])
 
     def __str__(self):
-        return self.product
-
+        return self.product.title

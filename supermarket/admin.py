@@ -10,6 +10,10 @@ from .models import (
     Inventory,
 )
 
+# Customize Admin Site Header & Title
+admin.site.site_header = 'Tiramisu Supermarket Catalog'
+admin.site.site_title = 'Tiramisu Supermarket Catalog'
+
 
 # Register Catagory, Brand & Tag Models
 admin.site.register(Catagory)
