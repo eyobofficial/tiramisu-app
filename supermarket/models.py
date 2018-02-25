@@ -89,10 +89,35 @@ class Product(models.Model):
         return self.title
 
 
+class Section(models.Model):
+    """
+    Abstract (section)location of a product in the Supermarket
+    Example: Fruits Section, Snack Section, Beverage Section etc..
+    """
+    FLOOR_OPTIONS = (
+        ('first', 'First Floor'),
+        ('second', 'Second Floor'),
+        ('third', 'Third Floor'),
+    )
+    title = models.CharField('Floor Section Title', max_length=60)
+    floor = models.CharField(max_length=60, choices=FLOOR_OPTIONS)
+    description = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['floor', 'title', ]
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse('supermarket:section-detail', args=[str(self.pk)])
+
+    def __str__(self):
+        return self.title
+
+
 class Inventory(models.Model):
     """
     Abstracts Product Inventory
     """
+    section = models.ForeignKey(Section, null=True, on_delete=models.SET_NULL)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     stock = models.IntegerField(blank=True, null=True, default=0)
     updated_at = models.DateTimeField(auto_now=True)
@@ -105,5 +130,4 @@ class Inventory(models.Model):
 
     def __str__(self):
         return self.product
-
 
