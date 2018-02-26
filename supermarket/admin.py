@@ -5,6 +5,7 @@ from .models import (
     Catagory,
     Brand,
     Tag,
+    Unit,
     Product,
     Section,
     Inventory,
@@ -15,10 +16,11 @@ admin.site.site_header = 'Tiramisu Supermarket Catalog'
 admin.site.site_title = 'Tiramisu Supermarket Catalog'
 
 
-# Register Catagory, Brand & Tag Models
+# Register Catagory, Brand, Tag & Unit Models
 admin.site.register(Catagory)
 admin.site.register(Brand)
 admin.site.register(Tag)
+admin.site.register(Unit)
 
 
 # Register Product Model
@@ -28,6 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
         'title',
         'catagory',
         'brand',
+        'unit',
         'price',
         'on_sale',
         'created_at',

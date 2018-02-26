@@ -50,6 +50,35 @@ class Tag(models.Model):
     """
     title = models.CharField('Tag Name', max_length=30)
 
+    class Meta:
+        ordering = ['title', ]
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse('supermarket:tag-detail', args=[str(self.pk)])
+
+    def __str__(self):
+        return self.title
+
+
+class Unit(models.Model):
+    """
+    Abstracts a Measurement Unit
+    Example: no., meter, kg, liter etc...
+    """
+    title = models.CharField('Unit Name', max_length=60)
+    html_title = models.CharField(
+        max_length=30,
+        help_text='Unit with superscript tags. Eg. m3, m2...',
+    )
+
+    class Meta:
+        ordering = ['title', ]
+        verbose_name = 'Measurement Unit'
+        verbose_name_plural = 'Measurement Units'
+
+    def __str__(self):
+        return self.title
+
 
 class Product(models.Model):
     """
@@ -65,7 +94,21 @@ class Product(models.Model):
         null=True,
         blank=True
     )
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    unit = models.ForeignKey(
+        Unit,
+        on_delete=models.CASCADE,
+        verbose_name='Measurement Unit'
+    )
+    price = models.DecimalField(
+        'Price Per Unit',
+        max_digits=8,
+        decimal_places=2
+    )
+    minimum_stock = models.FloatField(
+        'Recommeded Minimum Stock Amount',
+        null=True,
+        blank=True
+    )
     thumbnail = models.ImageField(
         upload_to='thumbnails/',
         null=True, blank=True
