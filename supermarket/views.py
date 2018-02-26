@@ -12,7 +12,7 @@ class IndexView(TemplateView):
     """
     View for Index Page
     """
-    pass
+    template_name = 'supermarket/index.html'
 
 
 class CatagoryList(ListView):
