@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.generic.views import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView
 
 # Import Mddels
 from .models import (
