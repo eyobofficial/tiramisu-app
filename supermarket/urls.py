@@ -9,6 +9,7 @@ from .views import (
     ProductDetail,
 )
 
+# App namespace
 app_name = 'supermarket'
 
 # URL Maps
