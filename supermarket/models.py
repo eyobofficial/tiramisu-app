@@ -9,6 +9,11 @@ class Catagory(models.Model):
     """
     title = models.CharField('Catagory Title', max_length=60,)
     description = models.TextField(null=True, blank=True,)
+    thumbnail = models.ImageField(
+        upload_to='catagory/thumbnails/',
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         ordering = ['title', ]

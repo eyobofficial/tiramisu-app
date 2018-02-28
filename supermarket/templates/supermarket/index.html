@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block custom_css %}
   <style type="text/css">
@@ -9,3 +10,149 @@
 {% endblock custom_css %}
 
 {% block page_header %}{% endblock %}
+
+{% block page_intro %}
+<div class="intro" style="background-image: url({% static 'images/bg3.jpg' %});">
+    <div class="dtable hw100">
+        <div class="dtable-cell hw100">
+            <div class="container text-center">
+                <h1 class="intro-title animated fadeInDown"> AllMart Catalog </h1>
+
+                <p class="sub animateme fittext3 animated fadeIn">
+                    Find a product you want to buy here
+                </p>
+
+                <div class="row search-row animated fadeInUp">
+                    <div class="col-xl-8 col-sm-8 search-col relative"><i class="icon-docs icon-append"></i>
+                        <input type="text" name="ads" class="form-control has-icon"
+                               placeholder="I'm looking for a ..." value="">
+                    </div>
+                    <div class="col-xl-4 col-sm-4 search-col">
+                        <button class="btn btn-primary btn-search btn-block"><i
+                                class="icon-search"></i><strong>Find</strong></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock page_intro %}
+
+{% block page_main %}
+<div class="main-container">
+    <div class="container">
+        <div class="col-xl-12 content-box ">
+            <div class="row row-featured">
+                <div class="col-xl-12  box-title ">
+                    <div class="inner"><h2><span>On </span>
+                        Sale <a href="category.html" class="sell-your-item"> View more <i
+                                class="  icon-th-list"></i> </a></h2>
+
+                    </div>
+                </div>
+
+                <div style="clear: both"></div>
+
+                <div class=" relative  content featured-list-row  w100">
+
+                    <nav class="slider-nav has-white-bg nav-narrow-svg">
+                        <a class="prev">
+                            <span class="nav-icon-wrap"></span>
+
+                        </a>
+                        <a class="next">
+                            <span class="nav-icon-wrap"></span>
+                        </a>
+                    </nav>
+
+                    <div class="no-margin featured-list-slider ">
+                        <div class="item"><a href="ads-details-automobile.html">
+                 <span class="item-carousel-thumb">
+                    <img class="img-responsive" src="{% static 'images/auto/2012-mercedes-benz-sls-amg.jpg' %}" alt="img">
+                 </span>
+                            <span class="item-name"> 2011 Mercedes-Benz SLS AMG  </span>
+                            <span class="price">  $204,990 </span>
+                        </a>
+                        </div>
+
+                        <div class="item">
+
+                            <a href="ads-details.html">
+                 <span class="item-carousel-thumb">
+                    <img class="img-responsive" src="{% static 'images/item/tp/Image00011.jpg' %}" alt="img">
+                 </span>
+                                <span class="item-name"> Lorem ipsum dolor sit amet </span>
+                                <span class="price"> $ 260 </span>
+                            </a>
+                        </div>
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img"
+                                                                    src="{% static 'images/item/tp/Image00006.jpg' %}" alt="img"> </span>
+                            <span class="item-name"> consectetuer adipiscing elit </span>
+                            <span class="price"> $ 240 </span></a></div>
+
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img"
+                                                                    src="{% static 'images/item/tp/Image00022.jpg' %}" alt="img"> </span>
+                            <span class="item-name"> sed diam nonummy  </span> <span class="price"> $ 140</span></a>
+                        </div>
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img"
+                                                                    src="{% static 'images/item/tp/Image00013.jpg' %}" alt="img">  </span><span
+                                class="item-name"> feugiat nulla facilisis  </span> <span
+                                class="price"> $ 140 </span></a></div>
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img" src="{% static 'images/item/3.jpg' %}"
+                                                                    alt="img"> </span> <span class="item-name"> praesent luptatum zzril  </span>
+                            <span class="price"> $ 220 </span></a></div>
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img" src="{% static 'images/item/4.jpg' %}"
+                                                                    alt="img"> </span> <span class="item-name"> delenit augue duis dolore  </span>
+                            <span class="price"> $ 120 </span></a></div>
+
+                        <div class="item"><a href="ads-details.html">
+                            <span class="item-carousel-thumb"> <img class="item-img" src="{% static 'images/item/6.jpg' %}"
+                                                                    alt="img"> </span> <span class="item-name"> te feugait nulla facilisi </span>
+                            <span class="price"> $ 251 </span></a></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="col-xl-12 content-box ">
+            <div class="row row-featured row-featured-category">
+                <div class="col-xl-12  box-title no-border">
+                    <div class="inner"><h2><span>Browse by</span>
+                        Category <a href="category.html" class="sell-your-item"> View more <i
+                                class="  icon-th-list"></i> </a></h2>
+                    </div>
+                </div>
+                {% for catagory in catagory_list %}
+                <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
+                  <a href="#">
+                    {% if catagory.thumbnail %}
+                    <img src="{{ catagory.thumbnail.url }}" class="img-responsive" alt="img">
+                    {% else %}
+                    <img src="{% static 'images/default_thumbnails/catagory_thumbnail.png' %}" class="img-responsive" alt="img">
+                    {% endif %}
+                    <h6> {{ catagory.title }}</h6>
+                  </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div style="clear: both"></div>
+    </div>
+</div>
+{% endblock page_main %}

@@ -14,6 +14,11 @@ class IndexView(TemplateView):
     """
     template_name = 'supermarket/index.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(IndexView, self).get_context_data(*args, **kwargs)
+        context['catagory_list'] = Catagory.objects.all()
+        return context
+
 
 class CatagoryList(ListView):
     """
