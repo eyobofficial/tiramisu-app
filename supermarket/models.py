@@ -20,11 +20,17 @@ class Catagory(models.Model):
         verbose_name = 'Product Catagory'
         verbose_name_plural = 'Product Catagories'
 
-    def __str__(self):
-        return self.title
+    def sub_products(self):
+        """
+        Return a product list for the current catagory
+        """
+        return self.product_set.all()
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('supermarket:catagory-detail', args=[str(self.pk)])
+
+    def __str__(self):
+        return self.title
 
 
 class Brand(models.Model):
@@ -128,7 +134,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['title', 'price', ]
+        ordering = ['-on_sale', 'title', 'price', ]
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('supermarket:product-detail', args=[str(self.pk)])

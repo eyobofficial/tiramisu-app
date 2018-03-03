@@ -136,7 +136,7 @@
                 </div>
                 {% for catagory in catagory_list %}
                 <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                  <a href="#">
+                  <a href="{% url 'supermarket:catagory-detail' catagory.id %}">
                     {% if catagory.thumbnail %}
                     <img src="{{ catagory.thumbnail.url }}" class="img-responsive" alt="img">
                     {% else %}

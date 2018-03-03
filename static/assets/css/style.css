@@ -2758,6 +2758,14 @@ nav.slider-nav a {
   display: block;
   box-shadow: 0 1px 1px rgba(180, 180, 180, 0.5); }
 
+.categories-list li {
+  margin-bottom: 8px !important;
+}
+
+.categories-list li.active {
+  font-weight: bold;
+}
+
 .add-image {
   position: relative; }
 

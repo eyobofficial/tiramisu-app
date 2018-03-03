@@ -56,20 +56,25 @@
             <div class="col-md-3 page-sidebar mobile-filter-sidebar">
                 <aside>
                     <div class="inner-box">
-                        <div class="categories-list  list-filter">
-                            <h5 class="list-title"><strong><a href="category.html#">All Categories</a></strong></h5>
+                        <div class="categories-list list-filter">
+                            <h5 class="list-title"><strong><a href="category.html#">Categories</a></strong></h5>
                             <ul class=" list-unstyled">
-                                <li><a href="sub-category-sub-location.html"><span
-                                        class="title">Electronics</span><span class="count">&nbsp;8626</span></a>
+                                <li {% if not catagory %} class="active" {% endif %}>
+                                    <a href="{% url 'supermarket:catagory-list' %}">
+                                      <span class="title">All</span>
+                                      <span class="count">&nbsp; {{ product_list.count }}</span>
+                                    </a>
                                 </li>
-                                <li><a href="sub-category-sub-location.html"><span class="title">Automobiles </span><span
-                                        class="count">&nbsp;123</span></a></li>
-                                <li><a href="sub-category-sub-location.html"><span
-                                        class="title">Property </span><span class="count">&nbsp;742</span></a></li>
-                                <li><a href="sub-category-sub-location.html"><span
-                                        class="title">Services </span><span class="count">&nbsp;8525</span></a></li>
-                                <li><a href="sub-category-sub-location.html"><span
-                                        class="title">For Sale </span><span class="count">&nbsp;357</span></a></li>
+                                {% for catagory in catagory_list %}
+                                <li {% if catagory.id == object.id %}class="active"{% endif %}>
+                                    <a href="{% url 'supermarket:catagory-detail' catagory.id %}">
+                                      <span class="title">{{ catagory.title }}</span>
+                                      {% if catagory.sub_products.count > 0 %}
+                                      <span class="count">&nbsp;{{ catagory.sub_products.count }}</span>
+                                      {% endif %}
+                                    </a>
+                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!--/.categories-list-->
@@ -77,19 +82,10 @@
                         <div class="locations-list  list-filter">
                             <h5 class="list-title"><strong><a href="category.html#">Brands</a></strong></h5>
                             <ul class="browse-list list-unstyled long-list">
-                                <li><a href="sub-category-sub-location.html"> Atlanta </a></li>
-                                <li><a href="sub-category-sub-location.html"> Wichita </a></li>
-                                <li><a href="sub-category-sub-location.html"> Anchorage </a></li>
-                                <li><a href="sub-category-sub-location.html"> Dallas </a></li>
-                                <li><a href="sub-category-sub-location.html">New York </a></li>
-                                <li><a href="sub-category-sub-location.html"> Santa Ana/Anaheim </a></li>
-                                <li><a href="sub-category-sub-location.html"> Miami </a></li>
-                                <li><a href="sub-category-sub-location.html"> Virginia Beach </a></li>
-                                <li><a href="sub-category-sub-location.html"> San Diego </a></li>
-                                <li><a href="sub-category-sub-location.html"> Boston </a></li>
-                                <li><a href="sub-category-sub-location.html"> Houston </a></li>
-                                <li><a href="sub-category-sub-location.html">Salt Lake City </a></li>
-                                <li><a href="sub-category-sub-location.html"> Other Locations </a></li>
+                                <li><a href="#"> All </a></li>
+                                {% for brand in brand_list %}
+                                <li><a href="#"> {{ brand.title }} </a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!--/.locations-list-->
@@ -131,8 +127,13 @@
                             <div class="row">
                               <div class="col-md-2 no-padding photobox">
                                 <div class="add-image">
-                                    <a href="#">
+                                    <a href="{% url 'supermarket:product-detail' product.id %}">
+
+                                        {% if product.thumbnail %}
                                         <img class="thumbnail no-margin" src="{{ product.thumbnail.url }}" alt="img">
+                                        {% else %}
+                                        <img class="thumbnail no-margin" src="{% static 'images/default_thumbnails/product_thumbnail.png' %}" alt="img">
+                                        {% endif %}
                                     </a>
                                 </div>
                               </div>
