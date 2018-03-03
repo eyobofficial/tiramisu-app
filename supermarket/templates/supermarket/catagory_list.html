@@ -1,8 +1,192 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block main %}
-<h2>Catagory Lists</h2>
-{% for catagory in catagory_list %}
-<p>{{ catagory.title }}</p>
-{% endfor %}
-{% endblock main %}
+{% block title %}
+<title>Catagory List</title>
+{% endblock title %}
+
+{% block page_intro %}
+<div class="search-row-wrapper">
+    <div class="container ">
+        <form action="category.html#" method="GET">
+            <div class="row">
+
+
+                <div class="col-md-3">
+                    <input class="form-control keyword" type="text" placeholder="e.g. Mobile Sale">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control selecter" name="category" id="search-category">
+                        <option selected="selected" value="">All Categories</option>
+                        <option value="Vehicles" style="background-color:#E9E9E9;font-weight:bold;"
+                                disabled="disabled">- Vehicles -</option>
+                        <option value="Cars">Cars</option>
+                        <option value="Commercial vehicles">Commercial vehicles</option>
+                        <option value="Motorcycles">Motorcycles</option>
+                        <option value="Motorcycle Equipment">Car &amp; Motorcycle Equipment</option>
+                        <option value="Boats">Boats</option>
+                        <option value="Vehicles">Other Vehicles</option>
+                        <option value="dropoff" style="background-color:#E9E9E9;font-weight:bold;"
+                                disabled="disabled">- Extra -</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control selecter" name="location" id="id-location">
+                        <option selected="selected" value="">All Brands</option>
+                        <option value="AL">Nestle</option>
+                        <option value="AK">Sony</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-block btn-primary  "><i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock page_intro %}
+
+{% block page_main %}
+<div class="main-container">
+    <div class="container">
+        <div class="row">
+            <!-- this (.mobile-filter-sidebar) part will be position fixed in mobile version -->
+            <div class="col-md-3 page-sidebar mobile-filter-sidebar">
+                <aside>
+                    <div class="inner-box">
+                        <div class="categories-list  list-filter">
+                            <h5 class="list-title"><strong><a href="category.html#">All Categories</a></strong></h5>
+                            <ul class=" list-unstyled">
+                                <li><a href="sub-category-sub-location.html"><span
+                                        class="title">Electronics</span><span class="count">&nbsp;8626</span></a>
+                                </li>
+                                <li><a href="sub-category-sub-location.html"><span class="title">Automobiles </span><span
+                                        class="count">&nbsp;123</span></a></li>
+                                <li><a href="sub-category-sub-location.html"><span
+                                        class="title">Property </span><span class="count">&nbsp;742</span></a></li>
+                                <li><a href="sub-category-sub-location.html"><span
+                                        class="title">Services </span><span class="count">&nbsp;8525</span></a></li>
+                                <li><a href="sub-category-sub-location.html"><span
+                                        class="title">For Sale </span><span class="count">&nbsp;357</span></a></li>
+                            </ul>
+                        </div>
+                        <!--/.categories-list-->
+
+                        <div class="locations-list  list-filter">
+                            <h5 class="list-title"><strong><a href="category.html#">Brands</a></strong></h5>
+                            <ul class="browse-list list-unstyled long-list">
+                                <li><a href="sub-category-sub-location.html"> Atlanta </a></li>
+                                <li><a href="sub-category-sub-location.html"> Wichita </a></li>
+                                <li><a href="sub-category-sub-location.html"> Anchorage </a></li>
+                                <li><a href="sub-category-sub-location.html"> Dallas </a></li>
+                                <li><a href="sub-category-sub-location.html">New York </a></li>
+                                <li><a href="sub-category-sub-location.html"> Santa Ana/Anaheim </a></li>
+                                <li><a href="sub-category-sub-location.html"> Miami </a></li>
+                                <li><a href="sub-category-sub-location.html"> Virginia Beach </a></li>
+                                <li><a href="sub-category-sub-location.html"> San Diego </a></li>
+                                <li><a href="sub-category-sub-location.html"> Boston </a></li>
+                                <li><a href="sub-category-sub-location.html"> Houston </a></li>
+                                <li><a href="sub-category-sub-location.html">Salt Lake City </a></li>
+                                <li><a href="sub-category-sub-location.html"> Other Locations </a></li>
+                            </ul>
+                        </div>
+                        <!--/.locations-list-->
+
+                        <div style="clear:both"></div>
+                    </div>
+                    <!--/.categories-list-->
+                </aside>
+            </div>
+            <!--/.page-side-bar-->
+
+
+            <div class="col-md-9 page-content col-thin-left">
+                <div class="category-list">
+                    <div class="listing-filter">
+                        <div class="pull-left col-xs-6">
+                            <div class="breadcrumb-list">
+                                <a href="category.html#" class="current">
+                                    <span>All ads</span>
+                                </a>in
+                                <span class="cityName"> New York </span> <a href="category.html#selectRegion" id="dropdownMenu1"
+                                                                            data-toggle="modal"><span
+                                        class="caret"></span></a>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div class="adds-wrapper">
+                        {% for product in product_list %}
+                        <div class="item-list make-grid" data-mh="product-list">
+
+                            {% if product.on_sale %}
+                            <div class="cornerRibbons topAds">
+                                <a href="#">On Sale</a>
+                            </div>
+                            {% endif %}
+
+                            <div class="row">
+                              <div class="col-md-2 no-padding photobox">
+                                <div class="add-image">
+                                    <a href="#">
+                                        <img class="thumbnail no-margin" src="{{ product.thumbnail.url }}" alt="img">
+                                    </a>
+                                </div>
+                              </div>
+
+                              <!--/.photobox-->
+                              <div class="col-sm-7 add-desc-box">
+                                <div class="ads-details">
+                                    <h5 class="add-title text-center">
+                                        <a href="#">
+                                        {{ product.title }}
+                                        </a>
+                                    </h5>
+
+                                    <span class="info-row">
+                                        <!-- <p>Price: {{ product.price }}</p> -->
+                                    </span>
+                                </div>
+                              </div>
+                              <!--/.add-desc-box-->
+                              <div class="col-md-3 text-right  price-box">
+                                <h5 class="item-price text-center"> ETB {{ product.price }} </h5>
+                              </div>
+                            </div>
+                        </div>
+                        <!--/.item-list-->
+                        {% endfor %}
+                        <!--/.item-list-->
+                    </div><!-- /.adds-wrapper -->
+                   </div><!-- /.catagory-list -->
+
+                <div class="pagination-bar text-center">
+                    <nav aria-label="Page navigation " class="d-inline-b">
+                        <ul class="pagination">
+
+                            <li class="page-item active"><a class="page-link" href="category.html#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="category.html#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="category.html#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="category.html#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="category.html#">...</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="category.html#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--/.pagination-bar -->
+            </div>
+            <!--/.page-content-->
+
+        </div>
+    </div>
+</div>
+{% endblock page_main %}
+
+{% block vendor_js %}
+<script type="text/javascript" src="{% static 'assets/plugins/match-height/jquery.matchHeight-min.js' %}"></script>
+{% endblock vendor_js %}

@@ -26,6 +26,11 @@ class CatagoryList(ListView):
     """
     model = Catagory
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(CatagoryList, self).get_context_data(*args, **kwargs)
+        context['product_list'] = Product.objects.all()
+        return context
+
 
 class CatagoryDetail(DetailView):
     """

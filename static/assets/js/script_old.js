@@ -11,6 +11,8 @@
 
 $(document).ready(function () {
 
+
+
     var isMobile = function () {
         return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
     };
@@ -91,6 +93,38 @@ $(document).ready(function () {
      ====================================*/
 
 
+    $("#ajaxTabs li > a").click(function () {
+
+        $("#allAds").empty().append("<div id='loading text-center'> <br> <img class='center-block' src='images/loading.gif' alt='Loading' /> <br> </div>");
+        $("#ajaxTabs li").removeClass('active');
+        $(this).parent('li').addClass('active');
+        $.ajax({
+            url: this.href, success: function (html) {
+                $("#allAds").empty().append(html);
+                $('.tooltipHere').tooltip('hide');
+            }
+        });
+        return false;
+    });
+
+    urls = $('#ajaxTabs li:first-child a').attr("href");
+    //alert(urls);
+    $("#allAds").empty().append("<div id='loading text-center'> <br> <img class='center-block' src='images/loading.gif' alt='Loading' /> <br>  </div>");
+    $.ajax({
+        url: urls, success: function (html) {
+            $("#allAds").empty().append(html);
+            $('.tooltipHere').tooltip('hide');
+
+            // default grid view class invoke into ajax content (product item)
+            $(function () {
+                $('.hasGridView .item-list').addClass('make-grid');
+                $('.hasGridView .item-list').matchHeight();
+                $.fn.matchHeight._apply('.hasGridView .item-list');
+            });
+        }
+    });
+
+
     /*==================================
      List view clickable || CATEGORY
      ====================================*/
@@ -101,19 +135,79 @@ $(document).ready(function () {
     // var listItem = $('.item-list');
     // var addDescBox = $('.item-list .add-desc-box');
     //  var addsWrapper = $('.adds-wrapper');
-    // $('.item-list').addClass("make-grid");
 
-    $('.item-list').matchHeight();
-    $.fn.matchHeight._apply('.item-list');
+    $('.list-view,#ajaxTabs li a').click(function (e) { //use a class, since your ID gets mangled
+        e.preventDefault();
+        $('.grid-view,.compact-view').removeClass("active");
+        $('.list-view').addClass("active");
+        $('.item-list').addClass("make-list").removeClass("make-grid make-compact");
 
-    $('.hasGridView .item-list').matchHeight();
-    $.fn.matchHeight._apply('.hasGridView .item-list');
 
-    $('.row-featured .f-category').matchHeight();
-    $.fn.matchHeight._apply('.row-featured .f-category');
+        if ($('.adds-wrapper').hasClass('property-list')) {
+            $('.item-list .add-desc-box').removeClass("col-md-9").addClass("col-md-6");
+        } else {
+            $('.item-list .add-desc-box').removeClass("col-md-9").addClass("col-md-7");
+        }
 
-    $('.has-equal-div > div').matchHeight();
-    $.fn.matchHeight._apply('.row-featured .f-category');
+        $(function () {
+            $('.item-list').matchHeight('remove');
+        });
+    });
+
+    $('.grid-view').click(function (e) { //use a class, since your ID gets mangled
+        e.preventDefault();
+        $('.list-view,.compact-view').removeClass("active");
+        $(this).addClass("active");
+        $('.item-list').addClass("make-grid").removeClass("make-list make-compact");
+
+
+        if ($('.adds-wrapper').hasClass('property-list')) {
+            // keep it for future
+        } else {
+            //
+        }
+
+        $(function () {
+            $('.item-list').matchHeight();
+            $.fn.matchHeight._apply('.item-list');
+        });
+
+    });
+
+    $(function () {
+        $('.hasGridView .item-list').matchHeight();
+        $.fn.matchHeight._apply('.hasGridView .item-list');
+    });
+
+    $(function () {
+        $('.row-featured .f-category').matchHeight();
+        $.fn.matchHeight._apply('.row-featured .f-category');
+    });
+
+    $(function () {
+        $('.has-equal-div > div').matchHeight();
+        $.fn.matchHeight._apply('.row-featured .f-category');
+    });
+
+
+    $('.compact-view').click(function (e) { //use a class, since your ID gets mangled
+        e.preventDefault();
+        $('.list-view,.grid-view').removeClass("active");
+        $(this).addClass("active");
+        $('.item-list').addClass("make-compact").removeClass("make-list make-grid");
+
+
+        if ($('.adds-wrapper').hasClass('property-list')) {
+            $('.item-list .add-desc-box').addClass("col-md-9").removeClass('col-md-6');
+        } else {
+            $('.item-list .add-desc-box').toggleClass("col-md-9 col-md-7");
+        }
+
+        $(function () {
+            $('.adds-wrapper .item-list').matchHeight('remove');
+        });
+    });
+
 
     /*==================================
      Global Plugins ||
