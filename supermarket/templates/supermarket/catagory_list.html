@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}
 <title>Catagory List</title>
@@ -82,7 +83,6 @@
                         <div class="locations-list  list-filter">
                             <h5 class="list-title"><strong><a href="category.html#">Brands</a></strong></h5>
                             <ul class="browse-list list-unstyled long-list">
-                                <li><a href="#"> All </a></li>
                                 {% for brand in brand_list %}
                                 <li><a href="#"> {{ brand.title }} </a></li>
                                 {% endfor %}
@@ -154,7 +154,7 @@
                               </div>
                               <!--/.add-desc-box-->
                               <div class="col-md-3 text-right  price-box">
-                                <h5 class="item-price text-center"> ETB {{ product.price }} </h5>
+                                <h5 class="item-price text-center"> ETB {{ product.price|intcomma }} </h5>
                               </div>
                             </div>
                         </div>

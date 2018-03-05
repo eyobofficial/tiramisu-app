@@ -30,7 +30,7 @@ class CatagoryList(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(CatagoryList, self).get_context_data(*args, **kwargs)
         context['product_list'] = Product.objects.all()
-        context['brand_list'] = Brand.objects.all()
+        context['brand_list'] = Brand.objects.filter(featured=True)
         return context
 
 
@@ -39,12 +39,12 @@ class CatagoryDetail(DetailView):
     View for a particular Product Catagory Detail
     """
     model = Catagory
-    template_name = 'supermarket/catagory_list.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super(CatagoryDetail, self).get_context_data(*args, **kwargs)
         context['catagory_list'] = Catagory.objects.all()
-        context['brand_list'] = Brand.objects.all()
+        context['brand_list'] = Brand.objects.filter(featured=True)
+        context['total_product_count'] = Product.objects.all().count()
         context['product_list'] = Product.objects.filter(
             catagory=self.kwargs['pk']
         )

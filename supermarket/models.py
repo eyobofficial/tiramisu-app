@@ -40,9 +40,10 @@ class Brand(models.Model):
     """
     title = models.CharField('Brand Title', max_length=60)
     description = models.TextField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['title', ]
+        ordering = ['-featured', 'title', ]
         verbose_name = 'Product Brand'
         verbose_name_plural = 'Product Brands'
 
@@ -97,7 +98,12 @@ class Product(models.Model):
     Example: Mango Juice, 42' Sony LED TV, etc...
     """
     catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE)
-    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
+    brand = models.ForeignKey(
+        Brand,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
     tags = models.ManyToManyField(Tag, blank=True)
     title = models.CharField('Product Name', max_length=100)
     description = models.TextField(

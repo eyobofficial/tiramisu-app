@@ -18,10 +18,15 @@ admin.site.site_title = 'Tiramisu Supermarket Catalog'
 
 # Register Catagory, Brand, Tag & Unit Models
 admin.site.register(Catagory)
-admin.site.register(Brand)
 admin.site.register(Tag)
 admin.site.register(Unit)
 
+
+# Register Brand Model
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('title', 'featured', )
+    list_filter = ('featured', )
 
 # Register Product Model
 @admin.register(Product)

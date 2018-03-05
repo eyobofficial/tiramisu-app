@@ -2998,7 +2998,7 @@ nav.slider-nav a {
        -o-transition: all 0.3s ease 0s;
           transition: all 0.3s ease 0s; }
 
-.cornerRibbons a {
+.cornerRibbons span {
   color: #fff;
   display: block;
   font-family: Roboto Condensed, Helvetica, Arial, sans-serif;
@@ -3023,7 +3023,7 @@ nav.slider-nav a {
 .cornerRibbons.featuredAds {
   background: #FB8D17; }
 
-.cornerRibbons.featuredAds a {
+.cornerRibbons.featuredAds span {
   color: #fff; }
 
 .item-list.make-grid .cornerRibbons {
