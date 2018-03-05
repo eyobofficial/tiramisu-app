@@ -10,4 +10,4 @@ __pycache__
 *.pyc
 
 # Media Assets
-media/*
+# media/*
